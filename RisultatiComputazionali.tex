@@ -1,0 +1,112 @@
+\chapter{Computational results}
+\label{chap:Computational_results}
+
+\section{QAPLIB Library}
+\label{sec:QAPLIB}
+QAPLIB \cite{QAPLIB} is an online library of instances, solutions and lower bounds.
+The QAPLIB home page was created by Stefan Karisch in 1991.
+
+According to \cite{Taillard1995}, QAPLIB's instances can be classified into four groups:
+
+\begin{description}
+	\item[Unstructured, randomly generated instances]Instances with the distance and
+	flow matrix entries generated randomly according to an uniform distribution.
+	
+	These instances are among the
+	hardest to solve exactly. Nevertheless, most iterative search methods find solutions within $1\%/2\%$ from the best known solutions relatively fast.
+	\item[Unstructured instances with grid-distances]Instances with the distance matrix $\bm D$
+	defined as the Manhattan distance between grid points on a $n_1 \times n_2$ 2 grid and with random flows.
+	\item[Real life instances] These instances are discussed later.
+	\item[Real-life like instances] These instances are generated in such a way that the matrix
+	entries resemble the distribution found in real-life problems
+
+\end{description}
+
+\subsubsection{Real life instances}
+These instances arise from practical applications. There are five group of real life instances. In chronological order they are:
+\begin{itemize}
+	
+	\item \textit{Steinberg's} \cite{Steinberg1961} (1961). This instance is described in section \ref{sec:BackboardWiring}. There are three instances, the first one has a distance matrix corresponding to Manhattan distances, the
+	second the square of Euclidean distances and the third Euclidean distances. These instances are denoted \texttt{Ste36a}, \texttt{Ste36b}, \texttt{Ste36c}. Their size is $n = 9 \times  4 = 36$ and they are asymmetric. They are solved optimally.
+	
+	\item \textit{Elshafei’s} (1977). This problem is described in section \ref{sec:Hospital Layout}. The size of the problem is $n = 19$. It is denoted \texttt{Els19} and it is solved optimally. 
+	
+	\item \textit{Burkard and Offermann} (1977). This instance is described in section \ref{sec:Keyboard}. The size is $n=26$. Since four different languages and two variety of typewriters are considered, there are eight problems of this type. Since there are $26$ ‘Latin' letters, the size of the problems is $n = 26$. They are denoted 	\texttt{Bur26a},\dots , \texttt{Bur26h} and they are solved optimally. These instances are asymmetric.
+	
+	\item \textit{J. Krarup and P.M. Pruzan}(1981). This instance is similar to Elshafei's one. There are three instances, denoted by \texttt{Kra30a}, \texttt{Kra30b} and \texttt{Kra32}.
+\end{itemize}
+
+The real-life instances have in common that the flow matrices have (in contrast to the previously mentioned randomly generated instances) many zero entries and the remaining entries are clearly not uniformly distributed.
+
+
+
+
+\section{NEOS}
+\label{sec:NEOS}
+Other instances can be found on NEOS  webpage on  \url{https://neos-guide.org/content/quadratic-assignment-problem}.
+
+
+They have small size : $n=4,5,6,7,8,9$. Thus, we will denote them as $\texttt{Neos4},\dots,\texttt{Neos9}$. Every instance is symmetric.
+
+\section{Comparison of algorithms}
+In table \ref{tab:Finalcomparison} metaheuristic algorithms are compared. As we can see, Ant Colony Optimization algorithm performed fairly well, especially with instances of low dimension. In particular, he provided the optimal solution for every \texttt{bur26x} instances and most of the Nugent.
+
+On the other hand, GVNSfirst sometimes performed better than ACO with instances of higher dimension, e.g., \texttt{sko42},\texttt{sko72}, \texttt{sko100b-f} and \texttt{wil50}). Note that GVNSfirst provided the optimal solution of \texttt{sko42} and \texttt{sko72}. Nevertheless, he failed in \texttt{sko56} and \texttt{sko64}, with a $6\%$ PD.
+
+GVNSbest in general performed worse than GVNSfirst with some exceptions (\texttt{sko49}, the already cited \texttt{sko56}, \texttt{sko64}, \texttt{nug22},\texttt{nug25}).
+
+As regards Tabu Search, it did not perform well in general. The minimum of PD provided is $0.54\%$ for \texttt{bur26h}, while the other algorithms reached the optimal solution. Often it provide a permutation with more than $5\%$ of PD.
+
+
+\begin{table}
+			\centering
+		\caption[Comparison of metaheuristic algorithms]{Comparison of 			metaheuristic algorithms.The results are the minimum over $5$ independent runs. For each instance we set $t_\mathrm{max}=\SI{60}{s}$. Instances for which the optimal value is not known are marked with \virgolette{*}.} \label{tab:Finalcomparison}	\begin{tabular}{l*{4}{S[table-format=2.2]}}
+	%	\footnotesize	
+
+	\toprule
+	Instance &  {TS} & {ACO} & {GVNSfirst} & {GVNSbest}\\
+	\midrule
+	\texttt{bur26a          } &  0.97 &  0.00 &  0.00 &  0.11 \\
+	\texttt{bur26b          } &  1.15 &  0.00 &  0.17 &  0.17 \\
+	\texttt{bur26c          } &  1.25 &  0.00 &  0.00 &  0.00 \\
+	\texttt{bur26d          } &  1.62 &  0.00 &  0.00 &  0.00 \\
+	\texttt{bur26e          } &  1.40 &  0.00 &  0.00 &  0.00 \\
+	\texttt{bur26f          } &  1.94 &  0.00 &  0.00 &  0.02 \\
+	\texttt{bur26g          } &  1.19 &  0.00 &  0.00 &  0.00 \\
+	\texttt{bur26h          } &  0.54 &  0.00 &  0.00 &  0.00 \\
+	\texttt{nug12           } & 9.69 & 0.00 & 0.00 & 1.38  \\
+	\texttt{nug14           } & 7.50 & 0.00 & 0.39 & 1.97  \\
+	\texttt{nug15           } & 9.22 & 0.00 & 0.00 & 0.87  \\
+	\texttt{nug16a          } & 9.19 & 0.00 & 0.00 & 1.49  \\
+	\texttt{nug16b          } & 13.71& 0.00 & 0.00 & 0.00  \\
+	\texttt{nug17           } & 9.01 & 0.00 & 0.00 & 0.00  \\
+	\texttt{nug18           } & 12.12 &  0.00 &  0.00 &  0.73 \\
+	\texttt{nug20           } & 11.67 &  0.00 &  0.70 &  1.09 \\
+	\texttt{nug21           } & 12.06 &  0.00 &  0.16 &  0.33 \\
+	\texttt{nug22           } & 10.85 &  0.00 &  0.50 &  0.00 \\
+	\texttt{nug24           } & 13.19 &  0.00 &  0.00 &  0.69 \\
+	\texttt{nug25           } &  8.12 &  0.00 &  0.16 &  0.11 \\
+	\texttt{nug27           } &  6.38 &  0.00 &  0.00 &  0.84 \\
+	\texttt{nug28           } & 10.61 &  0.12 &  0.00 &  0.66 \\
+	\texttt{nug30           } &  9.96 &  0.07 &  0.00 &  1.57 \\
+	\texttt{sko42}* &  7.94 &  0.11 &  0.00 &  0.04 \\
+	\texttt{sko49}* &  6.78 &  0.42 &  1.00 &  0.03 \\
+	\texttt{sko56}* &  5.60 &  0.38 &  5.00 &  0.49 \\
+	\texttt{sko64}* &  5.03 &  0.39 &  5.00 &  0.24 \\
+	\texttt{sko72}* &  4.76 &  0.44 &  0.00 &  0.27 \\
+	\texttt{sko81}* &  4.42 &  0.99 &  1.33 &  1.41 \\
+	\texttt{sko90}*&  4.43 &  1.06 &  0.98 &  1.34 \\
+	\texttt{sko100a}*&  3.99 &  0.67 &  0.79 &  1.00 \\
+	\texttt{sko100b}* &  3.89 &  1.38 &  0.67 &  1.24 \\
+	\texttt{sko100c}* &  4.00 &  1.06 &  0.58 &  1.22 \\
+	\texttt{sko100d}*&  4.05 &  1.31 &  0.54 &  1.52 \\
+	\texttt{sko100e}* &  3.85 &  1.38 &  1.44 &  1.48 \\
+	\texttt{sko100f}* &  4.42 &  1.03 &  1.06 &  1.87 \\
+	\texttt{tho30           } & 12.86 &  0.00 &  0.29 &  2.47 \\
+	\texttt{tho40}*& 11.89 &  0.20 &  0.05 &  0.93 \\
+	\texttt{tho150}* &  4.58 &  0.76 &  1.38 &  1.45 \\
+	\texttt{wil50}* &  2.65 &  0.15 &  0.03 &  0.43 \\
+	\texttt{wil100}* &  1.93 &  0.31 &  0.37 &  0.93 \\
+	\bottomrule
+\end{tabular}
+\end{table}

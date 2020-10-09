@@ -1,0 +1,366 @@
+% !TeX spellcheck = en_US
+\chapter{The quadratic assignment problem}
+\label{Chap:TheQAP}
+
+\start{I}{n this} chapter we will describe formulations and variants of the Quadratic Assignment Problem. There are several equivalent formulations of the QAP, each one exploiting a different feature of the structure of the problem. Different formulations lead to different solution approaches. Other formulations and variants can be found in \cite[Ch. 7]{Burkard2012}.
+
+
+
+\section{Description and formulations}
+\label{sec:formulations}
+A set of $n$ facilities has to be allocated to a set of $n$ locations. We are given three matrices:
+\begin{itemize}
+	\item $\bm F\in\R^{n\times n}$, where $\bm F = (f_{ij})$ and $f_{ij}$ is the \textit{flow} between facility $i$ and facility $j$. Therefore, $f_{ij}$ could be viewed as the amount of supplies transported between the two facilities. Hence, it is the cost per unit length.
+	\item $\bm D\in\R^{n\times n}$, where $\bm D  = (d_{rs})$ and $d_{rs}$ is the \textit{distance} between location $r$ and location $s$.  Note that $d_{rs}$ is a length.
+	\item $\bm C\in\R^{n\times n}$, where $\bm C= (c_{ir})$ and $c_{ir}$ is the \textit{cost} of placing facility $i$ at location $r$. Note that $c_{i\pi(i)}$ is a cost.
+\end{itemize}
+
+\subsection{Combinatorial formulation}
+The feasible set is the set of permutation of $n$ elements $\Sn$. 
+
+If $\pi \in \Sn$, the product $f_{ij}\, d_{\pi(i)\pi(j)}$ is the transportation cost associated to assigning facility $i$ to location $\pi(i)$ and facility $j$ to location $\pi(j)$. That is, the transportation cost is given by the product flow times distances. 
+
+Each term $c_{i \pi(i)}+\sum_{j=1}^n f_{ij}d_{\pi(i)\pi(j)}$ represents the total cost, related to facility $i$ given by the cost for installing it at location $\pi(i)$ plus the transportation costs to all facilities $j$, if installed at locations $\pi(1),\pi(2),\dots,\pi(n)$. 
+
+Hence, the QAP can be written as 
+
+\begin{tcolorbox}[title=Combinatorial formulation]
+\begin{equation}
+\label{eq:defQAP}
+\min_{\pi \in \Sn}{ \left[\sum_{i=1}^n\sum_{j=1}^n f_{ij}d_{\pi(i)\pi(j)}+\sum_{i=1}^n c_{i\pi(i)}\right]}
+\end{equation}
+\end{tcolorbox}
+In future, $z(\pi)$ will denote the quadratic term of the objective function
+\begin{equation}
+\label{eq:DefFunObj}
+z(\pi)= \sum_{i=1}^n\sum_{j=1}^n f_{ij}d_{\pi(i)\pi(j)}.
+\end{equation}
+
+\noindent An instance of the \QAP	\ with input matrices $\bm F$, $\bm D$, $\bm C$ is denoted by $\QAP(\bm F, \bm D, \bm C)$. If there is no linear term (hence, $\bm C$ is the null matrix), we just write $\QAP(\bm F, \bm D)$.
+
+\subsection{Lawler's general formulation}
+A more general version of the \QAP \ was considered by Lawler \cite{Lawler1963}, who introduced a four-index cost array\footnote{We denoted the $4$-dimensional array $\mathsf K$ by sans-serif font in order to distinguish it from $2$-dimensional matrices.} $\mathsf K = (k_{irjs})$ instead of the three matrices $\bm F$, $\bm D$ and $\bm C$. The relationship between the three matrices and $\mathsf K$ is the following:
+\begin{align}
+\label{eq:defK}
+k_{irjs}&=f_{ij}d_{rs} \quad &\text{for $i \neq j$ or $r \neq s$},\\
+k_{irir}&=f_{ii}d_{rr} +c_{ir} \quad &\text{for $i,r\in \{1,\dots,n\}$}.
+\end{align}
+
+
+\noindent Moreover, note that the objective function can be re-written as follows:
+\small
+\[
+\begin{split}
+\sum_{i=1}^n
+\left(
+ f_{ii}d_{\pi(i)\pi(i)}
+ + c_{i\pi(i)} 
+ + \sum_{\substack{j=1\\j\neq i}}^n f_{ij}d_{\pi(i)\pi(j)}
+ \right) 
+ &= \sum_{i=1}^n
+ \left(k_{i \pi(i) i \pi(i)}
+ + \sum_{\substack{j=1\\j\neq i}}^n k_{i \pi(i) j \pi(j)}
+ \right) \\
+ &= \sum_{i=1}^n
+ \left(\,\sum_{j=1}^n k_{i \pi(i) j \pi(j)}
+ \right)
+ .
+ \end{split}
+\]
+\normalsize
+According to this notation, the general form of the \QAP \ is
+\begin{tcolorbox}[title=Lawler's general formulation]
+	\begin{equation}
+	\label{eq:QAPgenerale}
+	\min_{\pi \in \Sn} \left[ \sum_{i=1}^n\sum_{j=1}^n k_{i \pi(i) j \pi(j)}\right]
+	\end{equation}
+\end{tcolorbox}
+
+
+
+The combinatorial formulation \eqref{eq:defQAP} is the most known, but there are others, totally equivalent, that we are going to describe.
+\subsection{Algebraic formulation}
+An other formulation is the algebraic one, which contains binary variables.
+
+Let $x_{ir}$ such that
+\[
+x_{ir}=\begin{cases}
+1 & \text{if the facility $i$ is assigned to location $r$}\\
+0 & \text{otherwise.}
+\end{cases}\]
+Hence the \QAP \ can be formulated as
+\begin{tcolorbox}[title=Algebraic formulation]
+\begin{equation}
+\label{eq:defQAP2}
+\begin{split}
+&\min{\left[\sum_{i=1}^n\sum_{j=1}^n\sum_{r=1}^n\sum_{s=1}^nf_{ij}d_{rs}x_{ir}x_{js}+\sum_{i=1}^n\sum_{r=1}^n c_{ir} x_{ir}\right]}\\
+&\text{ s.t} \quad  \sum_{i=1}^n x_{ir} = 1 \qquad \forall r\in \{1,\dots,n\}\\
+&\phantom{\text{ s.a}} \quad  \sum_{r=1}^n x_{ir} = 1 \qquad \forall i\in \{1,\dots,n\}\\
+&\phantom{\text{ s.a}} \quad  x_{ir}\in \{0,1\} \qquad \forall i,j\in \{1,\dots,n\} \\
+\end{split}
+\end{equation}
+\end{tcolorbox}
+
+Using Lawler's general form \eqref{eq:QAPgenerale} this formulation can be written as
+\begin{tcolorbox}[title=Algebraic formulation in Lawler's form]
+\begin{equation}
+\label{eq:defQAP2Generale}
+\begin{split}
+&\min{\left[\sum_{i=1}^n\sum_{j=1}^n\sum_{r=1}^n\sum_{s=1}^nk_{irjs}x_{ir}x_{js}\right]}\\
+&\text{ s.t} \quad  \sum_{i=1}^n x_{ir} = 1 \qquad \forall r\in \{1,\dots,n\}\\
+&\phantom{\text{ s.a}} \quad  \sum_{r=1}^n x_{ir} = 1 \qquad \forall i\in \{1,\dots,n\}\\
+&\phantom{\text{ s.a}} \quad  x_{ir}\in \{0,1\} \qquad \forall i,j\in \{1,\dots,n\}\\
+\end{split}
+\end{equation}
+\end{tcolorbox}
+
+
+\subsection{Inner product formulation}
+The combinatorial formulation \eqref{eq:defQAP} can be written in a more compact way using the inner product of permutation matrices.
+\begin{defi}[Permutation Matrix]
+	Let $n\in \N$ and $\bm P$ be an $n \times n$ binary matrix. $\bm P$ is called a \textit{permutation matrix} if 
+	\small
+	\[
+	\sum_{i=1}^n p_{ij}=1 \text{ for every $j=1,\dots,n$}\quad\text{and} \quad \sum_{j=1}^n p_{ij}=1 \text{ for every $i=1,\dots,n$} \footnote{Hence the matrix $\bm X = (x_{ir})$ in equation \eqref{eq:defQAP2} is a permutation matrix.}.
+	\]	
+\end{defi}
+\normalsize
+\noindent Therefore, every permutation matrix is a matrix with one (and only one)~$1$ for every row and column. This suggest its name: for every permutation $\pi \in \Sn$ exists one and only one permutation matrix $\bm X_\pi= (x_{ir})$ such that:
+\[ x_{ir}=\begin{cases}
+1 & \text{if $\pi(i) = r$;} \\
+0 & \text{otherwise.}
+\end{cases}\]
+
+
+
+
+\noindent For example, if $n=4$ the permutation $\pi = [4,2,3,1]$ is associated to the permutation matrix:
+\begin{equation}
+	\label{eq:matricePermu}
+\bm X_\pi = \begin{pmatrix}
+0 & 0 & 0 & 1 \\
+0 & 1 & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+1 & 0 & 0 & 0 \\
+\end{pmatrix}.
+\end{equation}
+
+\noindent Hence, given a vector $\bm v\in \R^n$, the vector $\bm w :=\bm X_\pi \cdot \bm v$ is  obtained permuting the entries of $\bm v$ according to the permutation $\pi$, i.e., \[w_i ~=~v_{\pi(i)} \quad \forall i\in \{1,\dots,n\}.\]
+
+\noindent In fact, if we consider the permutation matrix described in \eqref{eq:matricePermu}, we obtain
+
+\[
+\bm X_\pi \cdot \bm v =
+ \begin{pmatrix}
+	0 & 0 & 0 & 1 \\
+	0 & 1 & 0 & 0 \\
+	0 & 0 & 1 & 0 \\
+	1 & 0 & 0 & 0 \\
+\end{pmatrix} 
+\begin{pmatrix}
+v_1\\
+v_2\\
+v_3\\
+v_4\\	
+\end{pmatrix}
+= \begin{pmatrix}
+	v_4\\
+	v_2\\
+	v_3\\
+	v_1\\	
+\end{pmatrix}.
+\]
+
+
+\noindent If $\bm A$ and $\bm B$ are two matrices $n \times n$, we can define their inner product $ \langle \bm A, \bm B \rangle $.
+
+
+\begin{defi}[Inner product of two matrices]
+	Let $\bm A= (a_{ij})$ and $\bm B=(b_{ij})$ be two real matrices $n \times n$. We define the \textit{inner product}\footnote{Sometimes in literature this operation is called \textit{Hadamard product}, from the French mathematician Jacques Hadamard.} of $\bm A$ and $\bm B$ as the real number defined by
+\[
+\langle \bm A,\bm B \rangle 
+:= \sum_{r=1}^n \sum_{s=1}^n a_{rs}b_{rs}.
+\]
+\end{defi}
+
+\noindent Letting $\bm X_\pi$ be a permutation matrix and $x_{ij}$ its entry $(i,j)$, we note that 
+\begin{equation}
+	\label{eq:MatPermQAP}
+	\begin{split}
+\Bigl(\bm X_\pi \,   \bm D \, \bm {X}_\pi \trasp \, \Bigr)_{ij} 
+&=\sum_{r=1}^n x_{ir} \big( \bm D \, \bm {X}_\pi \trasp \big)_{rj}   \\
+&=\sum_{r=1}^n x_{ir} \left(\sum_{s=1}^n d_{rs}x_{js}\right)   \\
+&=\sum_{r=1}^n \sum_{s=1}^n x_{ir}  d_{rs}x_{js}.
+\end{split}
+\end{equation}
+By \eqref{eq:defQAP2} and \eqref{eq:MatPermQAP} it follows that the \QAP \ can be rewritten as 
+
+\begin{tcolorbox}[title=Inner product formulation]
+\begin{equation}
+\label{eq:defQAP3}
+\begin{split}	
+&\min{\left[\langle \bm F, \bm X \bm D \bm X\trasp \rangle +  \langle \bm C, \bm X \rangle \right]} \\
+&\text{ s.t} \quad \bm X \text{ is a permutation matrix} \\
+\end{split}
+\end{equation}
+\end{tcolorbox}
+
+
+\subsection{Trace formulation}
+
+\begin{defi}[Trace of a Matrix]
+	Let $\bm A=(a_{ij})_{ij}$ be a matrix $n\times n$. We define \textit{trace} of $\bm A$ as the real number given by the sum of its diagonal elements:
+	\[
+	\tr{\bm A} = \sum_{i=1}^n a_{ii}
+	\]
+\end{defi}
+
+\begin{prop}
+Let  $\bm A$, $\bm B$ be two  $n \times n$ matrices, then we get some simple properties of the trace:
+\begin{enumerate}
+	\item $\tr{(\bm A + \bm B)}= \tr \bm A + \tr \bm B$; \label{propr:traccia1}
+	\item $\tr{ \bm A\trasp} = \tr \bm A$;\label{propr:traccia2}
+	\item $\tr{(\bm A \bm B)} = \tr{(\bm A \trasp \bm B \trasp )}$;\label{propr:traccia3}
+	\item $\langle \bm A,\bm B \rangle = \tr{(\bm A\trasp \bm B)}$.\label{propr:traccia4}
+\end{enumerate}
+\end{prop}
+We can rewrite  \eqref{eq:defQAP3} using the trace operator, in fact
+\[
+\begin{split}
+\langle \bm F, \bm X \bm D \bm X\trasp \rangle +  \langle \bm C, \bm X \rangle &\overset{\ref{propr:traccia4}}{=}  \tr{ \left(\bm F \trasp  \bm X \bm B \bm X\trasp\right)} + \tr{\left(\bm C\trasp \bm  X\right)} \\
+ &\overset{\ref{propr:traccia3}}{=} \tr{ \left(\bm F   \bm X\bm D\trasp \bm X\trasp\right)} +\tr{\left(\bm C \bm  X\trasp \right)}\\
+ &\overset{\ref{propr:traccia1}}{=} \tr{\left(\bm F   \bm X \bm D \trasp \bm X\trasp + \bm C \bm  X \trasp \right)} \\
+ &= \tr{\Bigl((\bm F  \bm X \bm D \trasp  + \bm C)\bm X \trasp \Bigr)}
+ \end{split}
+\]
+Therefore the equation \eqref{eq:defQAP3} can be rewritten as
+\begin{tcolorbox}[title=Trace formulation]
+	\begin{equation}
+	\label{eq:QAP_traccia}
+	\begin{split}	
+	&\min{\left[ \tr{\Bigl((\bm F \trasp  \bm X \bm D + \bm C)\bm X \trasp \Bigr)} \right]} \\
+	&\text{ s.t.} \quad \bm X \text{ is a permutation matrix.} \\
+	\end{split}
+	\end{equation}
+\end{tcolorbox}
+
+The trace formulation of the QAP was used by Finke, Burkard e Rendl \cite{Finke1987} to introduce eigenvalue bounds for QAP.
+
+
+\subsection{Kronecker product formulation}
+A further reformulation can be observed exploiting the Kronecker product of two matrices.
+\begin{defi}[Kronecker product]
+	Let $\bm A \in \R^{m \times n}$ and $\bm B \in \R^{r \times s}$ two matrices. We define the Kronecker product $\bm A \otimes \bm B \in \R^{mr \times ns}$ as the matrix formed by all possible products $a_{ij}b_{hk}$:
+\[
+\bm A \otimes \bm B = \begin{pmatrix}
+a_{11}B & a_{12} B & \dots & a_{1n}B \\
+\vdots & \vdots & \ddots & \vdots \\
+a_{m1}B& a_{m2}B & \dots & a_{mn}B \\
+\end{pmatrix}.
+\]	
+Now, let $\bm X$ be a permutation matrix. We can consider the four-index cost array $\mathsf K$ introduced in equation \eqref{eq:defK}, as \virgolette{matrix of matrices}, so every $n \times n$ matrix $\bm K^{ir}$ is formed by the elements $k_{irjs}$	with fixed indices $i$ and $r$ and variable indices $j,s = 1,2,\dots,n$. Using this notation we get
+
+\[
+\begin{split}
+\langle \mathsf K, \bm X \otimes \bm X \rangle &=\left\langle \begin{bmatrix}
+\bm K^{11} & \dots &\bm  K^{1n} \\
+\vdots & \ddots & \vdots \\
+\bm K^{n1} & \dots & \bm K^{nn} \\
+\end{bmatrix}
+\begin{bmatrix}
+x_{11}\bm X &\dots &x_{1n}\bm X \\
+\vdots & \ddots & \vdots \\
+x_{n1}\bm X & \dots & x_{nn}\bm X \\
+\end{bmatrix}\right\rangle \\
+&=\sum_{i=1}^n\sum_{r=1}^n x_{ir}\langle \bm K^{ir},\bm X  \rangle \\
+&=\sum_{i=1}^n\sum_{r=1}^n \sum_{j=1}^n\sum_{s=1}^n k_{irjs}x_{ir}x_{js},
+\end{split}
+\]
+which is the objective function from \eqref{eq:defQAP2Generale}.
+	This lead us to the Kronecker product formulation of the QAP.
+	
+	\begin{tcolorbox}[title = Kronecker product formulation]
+		\begin{equation}
+		\begin{split}	
+		&\min{\langle \mathsf K, \mathsf Y \rangle} \\
+		&\text{ s.t.} \quad   \mathsf Y = \bm X \otimes \bm X \\
+		&\phantom{\text{ s.t.}} \quad \bm X \text{ is a permutation matrix} \\
+\end{split}
+		\end{equation}
+	\end{tcolorbox}
+	
+\end{defi}
+
+\begin{comment}
+\subsection{Convex and concave integer formulation}
+For any $\bm A \in \R^{n \times n}$ let $\vettore(\bm A) \in \R^{n^2}$ be the vector obtained by stacking the columns of $\bm A$ on top of one other.
+
+Using  $\tr(\bm A \bm B) = \tr{(\bm B\trasp \bm A \trasp )} $  and $\tr\left(\bm A \bm B\trasp \right) = \vettore(\bm A\trasp) \vettore(\bm B) $, the trace formulation \eqref{eq:QAP_traccia} can be rewritten as
+\[
+\begin{split}
+\tr{\Bigl((\bm F  \bm X \bm D  \trasp+ \bm C)\bm X \trasp \Bigr)} 
+&=\tr{\Bigl(\bm F   \bm X \bm D\trasp \bm X \trasp \Bigr)} + \tr{\left(\bm C \bm X \trasp \right)} \\
+&=\tr{\Bigl(\bm F \trasp  \bm X \bm D \bm X \trasp \Bigr)} + \tr{\left(\bm X \bm C \trasp \right)} \\
+&=\vettore(\bm X) \trasp\vettore{\left(\bm F   \bm X \bm D\trasp \right)} +\vettore(\bm C) \trasp \vettore(\bm X)  \\
+&=\vettore(\bm X) \trasp \left(\bm D  \otimes \bm F\right)\vettore(\bm X) +\vettore(\bm C) \trasp \vettore(\bm X)
+\end{split}
+\]
+
+
+Were we used in the final step
+\[
+\vettore{(\bm F \bm X \bm V)} = \left(\bm V\trasp \otimes \bm A\right) \vettore(\bm X)
+\]
+
+(See theorem 2, p. 35 in \textit{Matrix Differential Calculus with Applications in Statistics and Econometrics} by J. R. Magnus and H. Neudecker \cite{Magnus1999}).
+
+
+The element $f_{ik}d_{jl}$ lies in the $((j-1)n+i)$th row and $((l-1)n+k)$th column of matrix $\bm D \otimes \bm F$. Therefore, we can arrange the $n^4$ cost coefficients $d_{ijkl}$ in a new way so that the element $d_{ijkl}$ lies in row $(j-1)n+i$ and column $(l-1)n+k$ of an $n^2\times n^2$ matrix $\bm M$.
+The general QAP can be written as
+
+\begin{tcolorbox}[title=Convex formulation]
+	\begin{equation}
+\begin{split}	
+&\min{\left[\bm x\trasp \bm M \bm x\right]} \\
+&\text{ s.t.} \quad   \bm X \text{ is a permutation matrix}\\
+&\phantom{\text{ s.t.}} \quad \bm x = \vettore(\bm X)
+\end{split}
+	\end{equation}
+\end{tcolorbox}
+
+We can assume that $\bm M$ is symmetric and positive definite/negative, so we can write a \QAP \ as a quadratic convex program or quadratic concave program.
+
+
+\end{comment}
+
+\section{Variants}
+\label{sec:Variants}
+There are some variants in literature. We are going to show some of the principal ones. Many others can be found in \cite[Ch. 9]{Burkard2012}.
+\subsection{QBAP}
+The most known variants of the \QAP \ is the \textit{Quadratic Bottleneck Assignment Problem} (QBAP), that is obtained by replacing the sums in the objective function of a QAP with the maximum operator.
+
+The QBAP can be formulated as
+
+\begin{equation}
+\min_{\pi \in S_n} {\left[\max{\left(\max_{1\le i,j \le n} {f_{ij}d_{\pi{(i)}\pi{(j)}}}, \max_{1\le i\le n}{c_{i\pi(i)}}\right)}\right]}. 
+\end{equation}
+Basically all QAP applications give rise to a QBAP model as well, because it often makes sense to minimize the largest cost instead of the overall cost incurred by some decisions.
+
+\subsection{Quadratic semi-assignment problem}
+The \textit{quadratic semi-assignment problem} (semi-\QAP) has the same objective function as the \QAP \ but allows the solution not to be permutations: they map the set of integers $ N=\{1,2,\dots,n\}$ to the set $ M=\{1,2,\dots,m\}$ with $n>m$ (so there are more facilities than locations and there is no limit to the number of facilities we can assign to the same location)
+
+We can write the semi-\QAP \ in the algebraic form as
+	\begin{equation}
+	\label{eq:Semi-qap}
+	\begin{split}
+	&\min{\left[\sum_{i=1}^n\sum_{j=1}^n\sum_{r=1}^m\sum_{s=1}^mf_{ij}d_{rs}x_{ir}x_{js}+\sum_{i=1}^n\sum_{r=1}^m c_{ir} x_{ir}\right]}\\
+	&\text{ s.t} \quad  \sum_{r=1}^m x_{ir} = 1 \quad i=1,\dots,n \\
+	&\phantom{\text{ s.t}} \quad  x_{ir}\in \{0,1\} \quad i = 1,2,\dots,n \quad j=1,2,\dots,m\\
+	\end{split}
+	\end{equation}
+
+\noindent The semi-\QAP \ is $\mathbf{NP}$-hard, as an instance of QAP$(\bm F, \bm D, \bm C)$ can always be transformed into an equivalent instance of semi-QAP by adding slack variables.
+
+
+
+From now on, the matrix $\bm C$ will be the null matrix, hence, no linear term will appear in the objective function.

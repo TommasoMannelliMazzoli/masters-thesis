@@ -1,0 +1,42 @@
+% !TeX spellcheck = it_IT
+% !TEX encoding = UTF-8 Unicode
+\documentclass[a4paper,openright, oneside]{scrartcl}
+%\documentclass[a4paper]{amsart}
+\usepackage[utf8]{inputenc}
+\usepackage{type1ec}
+\usepackage[T1]{fontenc}
+\usepackage{pdfx}
+%\usepackage{lmodern}
+\usepackage[italian]{babel}			   
+			   
+%\usepackage{classicthesis}			   
+\usepackage[
+%	pdfpagemode={UseOutlines},%
+%	bookmarksopen,%%
+%	pdfstartview={FitH},%
+%	colorlinks
+]{hyperref}
+\date{}
+\title{Abstract}
+\begin{document}
+\maketitle
+\begin{description}
+	\item[Candidato] Tommaso Mannelli Mazzoli.
+	\item[Titolo della tesi] Il Problema di Assegnazione Quadratica: approcci metaeuristici.
+	\item[Relatore] prof.ssa Stefania Bellavia\footnote{\url{stefania.bellavia@unifi.it}, Università degli Studi di Firenze, Firenze.}.
+	\item[Correlatore] prof. Angel Felipe Ortega\footnote{\url{felipe@mat.ucm.es}, Universidad Complutense de Madrid, Madrid.}.
+\end{description}
+
+
+Nella tesi si studia il Problema di Assegnazione Quadratica (QAP). Il QAP è un problema di ottimizzazione combinatoria, che è stato dimostrato appartenere alla classe di problemi $\mathbf{NP}$-hard.
+
+Lo scopo di questa tesi è quello di descrivere il problema, alcune sue formulazioni e applicazioni, studiare vari algoritmi euristici e metaeuristici, implementarli e compararli.
+
+Per quanto riguarda i metodi euristici abbiamo implementato algoritmi greedy e di ricerca locale.
+
+Questi metodi sono stati usati per costruire algoritmi metaeuristici più avanzati, in grado di fornire soluzioni migliori. Abbiamo studiato e implementato l'Algoritmo di Colonia di Formiche (Ant Colony Optimization), la Ricerca Tabu (Tabu Search) e la Ricerca in Intorno Variabile (Variable Neighborhood Search).
+
+I metodi sono stato implementati in linguaggio Fortran e i codici sono stati resi disponibili nella repository di GitHub.
+
+Alla fine del documento vengono mostrati risultati numerici ottenuti comparando gli algoritmi su varie istanze presenti sulla libreria QAPLIB.
+\end{document}
