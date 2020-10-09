@@ -1,0 +1,239 @@
+% !TeX spellcheck = en_US
+% !TEX encoding = UTF-8 Unicode
+
+\documentclass[oneside,%
+			   openright,%
+			   a4paper]{book}	   			   
+%--------------------%
+% Essential packages %
+%--------------------%
+\usepackage[utf8]{inputenc}
+\usepackage{type1ec}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+
+\makeindex
+
+\usepackage[%
+	eulerchapternumbers,%
+	beramono,%
+	pdfspacing,%
+	parts,%
+	dottedtoc,%
+	listings
+	]{classicthesis}
+	
+\usepackage{upgreek}
+\usepackage{mathtools}
+\usepackage{cancel}
+\usepackage{frontespizio}
+\usepackage{float}
+\usepackage{pdflscape}
+\usepackage{epigraph} 
+% figures
+\usepackage{wrapfig}
+\usepackage{caption}
+\usepackage{subfig}
+\usepackage{pgf}
+\usepackage{graphicx}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.15}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+\definecolor{violino}{HTML}{8000FF}
+\usepackage[algoruled,%
+			linesnumbered,%
+			]{algorithm2e}
+\usepackage{upgreek}
+\usepackage{booktabs}
+\usepackage{mathtools}	% Carica amsmath
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{bm}
+\usepackage{tcolorbox}
+\usepackage{skak}
+\usepackage{longtable}
+\usepackage{afterpage}
+\usepackage{appendix}
+\usepackage{siunitx}
+\usepackage{lettrine} % Capilettera
+%--------------%
+% Bibliography %
+%--------------%
+\usepackage[autostyle,italian=guillemets]{csquotes}
+\usepackage[style=numeric,%
+			hyperref,%
+			backref,%
+			backend=biber]{biblatex}
+\addbibresource{Bibliografia.bib}
+%----------------%
+% New commands	 %
+%----------------%
+\newcommand{\numberset}{\mathbb} 
+\newcommand{\N}{\numberset{N}}
+\newcommand{\Z}{\numberset{Z}}
+\newcommand{\Q}{\numberset{Q}}
+\newcommand{\R}{\numberset{R}}
+\newcommand{\In}{[n]}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\D}{\mathcal{D}}
+\newcommand{\Sn}{S_n}
+\newcommand{\trasp}{^{\textup{T}}}
+\newcommand{\A}{\texttt{A}}
+\newcommand{\B}{\texttt B}
+\newcommand{\dmin}{\tettt{dmin}}
+\newcommand{\rr}[1]{\colorbox{blue!30}{#1}}
+\newcommand{\rrr}[1]{\colorbox{blue!60}{#1}}
+\newcommand{\best}[1]{\colorbox{green!40}{$0$}}
+\newcommand{\QAP}{QAP}
+\newcommand{\start}[2]{\lettrine[lines=4]{\color{BrickRed}#1}{#2}}
+\newcommand{\sectionstart}[2]{\lettrine[lines=2]{#1}{#2}}
+\newcommand{\virgolette}[1]{``#1''}
+\newcommand*\diff{\mathop{}\!\mathrm{d}}
+\providecommand*{\deriv}[3][]{\frac{\diff^{#1}#2}{\diff #3^{#1}}}
+\providecommand*{\pderiv}[3][]{\frac{\partial^{#1}#2}{\partial #3^{#1}}}
+\newcommand{\bel}{}
+\newcommand{\insiemi}{}
+%----------------%
+% Redefinitions  %
+%----------------%
+\graphicspath{ {Figures/} }
+\renewcommand{\Re}{\mathop{\mathrm{Re}}}
+\renewcommand{\Im}{\mathop{\mathrm{Im}}}
+\renewcommand{\vec}{\bm}
+\renewcommand{\Delta}{\varDelta}
+\renewcommand{\epsilon}{\varepsilon}
+\renewcommand{\phi}{\varphi}
+%----------------%
+% Math Operators %
+%----------------%
+\DeclareMathOperator{\Id}{Id}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\norma}{\lVert}{\rVert}
+\DeclareMathOperator{\vettore}{vec}
+\DeclareMathOperator{\supp}{supp}
+\DeclareMathOperator{\uimm}{i}
+\DeclareMathOperator{\esp}{e}
+\DeclareMathOperator{\fl}{fl}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\dist}{dist}
+%------------------%
+% New Environments %
+%------------------%
+% Definizione Sommario
+\newenvironment{abstract}%
+{\cleardoublepage%
+	\thispagestyle{empty}%
+	\null \vfill\begin{center}%
+		\bfseries \abstractname \end{center}}%
+{\vfill\null}
+\theoremstyle{definition}
+\newtheorem{defi}{Definition}[chapter]
+\theoremstyle{remark}
+\newtheorem{oss}{Remark}[chapter]
+\theoremstyle{plain}
+\newtheorem{prop}{Proposition}[chapter]
+\newtheorem{lemma}{Lemma}[chapter]
+\newtheorem{teo}{Theorem}[chapter]
+\newtheorem*{teo*}{Theorem}
+\newtheorem{cor}{Corollary}[chapter]
+
+\makeindex
+
+
+
+\begin{document}
+%--------------------%
+% INIZIO FRONTMATTER %
+%--------------------%
+\frontmatter 
+\begin{frontespizio}
+\Istituzione{Università degli studi di Firenze}
+\Logo{unifilogo}
+	\Divisione{Department of mathematics and computer sciences DIMAI}
+\Scuola{Master's degree in Applied Mathematics}
+\Titoletto{Master's thesis}
+\Titolo{The Quadratic Assignment Problem}
+\Sottotitolo{Metaheuristic approaches}
+	\Candidato[6462050]{Tommaso Mannelli Mazzoli}
+	\NCandidato{Candidate}
+	\NRelatore{Thesis advisor}{}
+	\Relatore{Stefania Bellavia \\ \small{Università degli studi di Firenze}}
+	\NCorrelatore{Research supervisor}{Research supervisors}
+	\Correlatore{Angel Felipe Ortega \\ \small{Universidad Complutense de Madrid}}
+	\Piede{Thesis submitted in 2020}
+\end{frontespizio}
+
+
+\newpage
+\vspace*{\fill}
+
+\begin{flushleft}	
+\noindent \textsc{colophon} \mbox{}\\
+\noindent This document was typeset using \LaTeX \, document processing system originally developed by Leslie Lamport, based on \TeX \, typesetting system created by Donald Knuth. 
+
+The typographic package \texttt{classicthesis} was used. The bibliography was processed by \texttt{Biblatex}. 
+
+The \LaTeX \ code of this document can be found on GitHub at \url{https://github.com/Tommaso-Mannelli-Mazzoli/masters-thesis}.
+\end{flushleft}
+
+
+
+\newpage
+\null\vspace{\stretch{1}}
+\begin{flushright}%
+\textit{To Michelangelo.}
+\end{flushright}
+\vspace{\stretch{2}}\null
+
+
+
+\begin{abstract}
+This thesis deals with the Quadratic Assignment Problem (QAP).
+
+The QAP is an \textbf{NP}-hard combinatorial optimization problem.
+	
+The goal of this thesis is to describe the problem, some of its reformulations and applications and to investigate a number of heuristic and metaheuristic methods.	
+
+We implemented greedy and local search heuristic algorithms, then,
+we use them to construct more advanced metaheuristic methods  which provide
+better solutions. We studied and implemented metaheuristics such as Ant Colony
+Optimization, Tabu search, Variable Neighborhood Search.
+
+These methods have been implemented in Fortran language and the codes have been made available in the GitHub repository. Numerical results obtained on several instances from the QAPLIB library are also shown.
+\end{abstract}
+
+\tableofcontents
+\listoffigures
+\listoftables
+\listofalgorithms
+\include{chapters/Introduzione}
+\include{chapters/SimbolieNotazioni}
+\include{chapters/Prefazione}
+%-------------------%
+% INIZIO MAINMATTER %
+%-------------------%
+\mainmatter
+\part{Theory}
+\include{chapters/IlproblemadelQAP}
+\include{chapters/Applicazioni}
+\part{Practice}
+\include{chapters/AlgEuristici}
+\include{chapters/AlgoritmiMetaeuristici}
+\include{chapters/RisultatiComputazionali}
+\include{chapters/Conclusions}
+\begin{appendices}
+\include{chapters/Appendice1}
+\include{chapters/Appendice2}
+\end{appendices}
+
+%-------------------%
+% INIZIO BACKMATTER %
+%-------------------%
+\backmatter
+\printbibliography[heading=bibintoc]
+\end{document}
