@@ -1,0 +1,42 @@
+% !TeX spellcheck = en_US
+\chapter{Introduction}
+\start{T}{his} dissertation deals with the numerical solution of the Quadratic Assignment Problem (QAP). It is one of the most studied and complex problem in the field of optimization, and it has lots of applications. The first formulation of the problem was introduced by Koopmans and Beckmann \cite{Koopmans1957} in 1957 and can described as follows:
+
+\begin{quote}
+Given $n$ facilities and $n$ possible locations, one wants to assign each facility to one location in order to minimize a prescribed cost function. This cost function depends on the known flow $f_{ij}$ from facility $i$ to facility $j$ and  on the distance $d_{rs}$ between location $r$ and location $s$. 
+\end{quote}
+
+The goal of the thesis is to describe the problem, its formulations, to implement heuristic and metaheuristic algorithms to obtain an approximated solution and to compare them.
+
+A first reformulation of the problem employing permutation is the following. Consider the locations set as a vector
+
+\[\bm v = (1,2,\dots,n),\]
+ therefore the solution is a permutation of the entries of $\bm v$.  That is, it is a permutation $\pi \colon \{1,\dots,n\}\to \{1,\dots,n \}$ such that $\pi(i)=r$ means to assign the facility $i$ to location $r$. 
+ 
+We will use \textit{one-note} notation. Thus, $\pi$ will be denoted as follows:
+
+\[
+\pi=\big[\pi(1),\pi(2),\dots,\pi(n)\big].
+\]
+
+This problem, even if it does not look so difficult at first sight, is actually pretty hard. First of all the optimal solution we are looking for is integer, and the exact algorithms (i.e. algorithms designed to provide an optimal solution) are extremely expensive for large scale problems. Moreover, the problem is not linear (as the name suggests, is quadratic). Therefore, for $n>30$ the computational time of exact algorithms is prohibitive \cite[p. 210]{Burkard2012}.
+
+
+
+There, we chose to follow a \textit{metaheuristic} approach. Heuristic algorithms do not guarantee to find an optimal solution and generally they return a sub-optimal solution. However, they are problem-dependent and may get trapped in local optima. Note that this is a trouble, since our goal is to achieve a global optimum.
+
+ As stated in the book \cite[p. ix]{Gendreau2019}, metaheuristics are \virgolette{solution methods that orchestrate an interaction between local improvement procedures and higher level strategies to create a process capable of escaping from local optima and performing a robust search of a solution space}. Metaheuristic algorithms are less problem dependent than heuristic methods and usually reach a sub-optimal solution with a reasonable computational cost, but it is not possible to assess the quality of the provided approximation due to the lack of an optimality measure.
+
+Finally, note that the QAP is $\mathbf{NP}$-hard \cite[Theorem~ 2.1]{Sahni_1976}.
+
+
+\paragraph{Document Organization} The remainder of this document is organized in the following manner:
+\begin{itemize}
+\item Chapter~\ref{Chap:TheQAP} provides background knowledge on the Quadratic Assignment Problem. We describe the original problem, two variants and  many equivalent formulations.
+\item Chapter~\ref{chap:Applications} describes some applications of QAP to the real world. The hospital Layout problem is described in Section~\ref{sec:Hospital Layout}, while the problem of organizing guests around a table is discussed in Section \ref{sec:Wedding_banquet}. The choice of assigning letters in a keyboard presented in Section~\ref{sec:Keyboard}. Finally, in Section~\ref{sec:Darboard} 
+we give an overview of the problem of arranging $20$ numbers around a dartboard, which can be expressed as a QAP instance.
+\item Chapter~\ref{chap:Heuristic} introduces heuristic algorithms. In Section~\ref{sec:LocalSearch} we give preliminary definitions of neighborhood of a permutation; then, we study and compare local search algorithms, used to improve the current solution in order to obtain a local optimum. In Section~\ref{sec:Constructive} constructive algorithms are described and compared.
+\item Chapter~\ref{chap:Metaheuristic} introduces metaheuristic algorithms. In Section ~\ref{sec:Tabu_search} the Tabu Search algorithm is described, in Section~\ref{sec:Ant_Colony_Optimization} the \virgolette{bio-inspired} Ant Colony Optimization algorithm is studied, while in Section~\ref{sec:Variable_neighborhood_Search} the Variable Neighborhood Search algorithm is analyzed.
+\item In Chapter~\ref{chap:Computational_results} a brief introduction of the instances used is presented to evaluate the performance of metaheuristic algorithms presented in Chapter~\ref{chap:Metaheuristic}. Then, the performance of such methods are discussed.
+\item In Chapter~\ref{chap:Conclusions} we propose a few possible enhancements and future developments. Finally, we sum up what we achieved with this work.
+\end{itemize}

@@ -1,0 +1,103 @@
+\chapter{Proof of theorem 3.1}
+\label{AppendiceA}
+
+\begin{teo*}
+
+	Let $\pi \in \Sn$ be a permutation and $i_1 \neq i_2$ be  two indices. Then, 
+	\begin{equation}
+	z(\pi_{i_1 i_2}) = z(\pi) + \Delta(\pi; i_1,i_2).
+	\end{equation} 
+\end{teo*}
+\begin{proof}\mbox{}\\
+	\noindent Applying definition \eqref{eq:DefFunObj} it follows that
+	\begin{equation}
+	\begin{split}
+	z(\pi_{i_1 i_2})-z(\pi)
+	&=\sum_{i=1}^n\sum_{j=1}^n 
+	f_{ij}d_{\pi_{i_1i_2}(i)\pi_{i_1i_2}(j)}
+	-
+	\sum_{i=1}^n\sum_{j=1}^n
+	f_{ij}d_{\pi(i)\pi(j)} \\
+	&=\sum_{i=1}^n\sum_{j=1}^n f_{ij}\left[d_{\pi_{i_1i_2}(i)\pi_{i_1i_2}(j)}-d_{\pi(i)\pi(j)}\right].\\
+	\end{split}
+	\end{equation}
+	Let $K=\{i_1,i_2\}$. Note that the sums can be split into different ones \footnote{Terms of the sums are omitted for sake of clarity.}:
+	\[
+	\begin{split}
+	\sum_{i=1}^n\sum_{j=1}^n &= \sum_{j \not \in K }\sum_{i=1}^n+\sum_{j \in K} \sum_{i=1}^n\\
+	&= \underbrace{\sum_{j\notin K}  \sum_{i \not \in K }}_{\sympawn} +\underbrace{\sum_{j\notin K}  \sum_{i  \in K }}_{\symknight} + \underbrace{\sum_{i=1}^n \sum_{j \in K}}_{\symbishop}.
+	\end{split} 
+	\]
+	The first sum \sympawn \ is null, since $\pi(i)=\pi_{i_1 i_2}(i)$ for every $i \notin K$ and therefore every term is $0$.
+	
+	As regards \symknight , we obtain 
+	\begin{equation}
+	\label{eq:teoremaDeltaparte1}
+	\begin{split}
+	\symknight &=\sum_{j\notin K}  \sum_{i  \in K } f_{ij}\left[d_{\pi_{i_1i_2}(i)\pi_{i_1i_2}(j)}-d_{\pi(i)\pi(j)}\right]\\
+	&=\sum_{j\notin K} \left\{f_{i_1j}\left[d_{\pi(i_2)\pi(j)}-d_{\pi(i_1)\pi(j)}\right]+f_{i_2j}\left[d_{\pi(i_1)\pi(j)}-d_{\pi(i_2)\pi(j)}\right]\right\} \\
+	&=\sum_{j\notin K} \left\{
+	\left(f_{i_1j}-f_{i_2j}\right)d_{\pi(i_2)\pi(j)} 
+	+
+	\left(f_{i_2j}-f_{i_1j}\right)d_{\pi(i_1)\pi(j)}\right\} \\
+	&=\sum_{j\notin K} 
+	\left(f_{i_1j}-f_{i_2j}\right)\left(d_{\pi(i_2)\pi(j)}-d_{\pi(i_1)\pi(j)} \right).
+	\end{split}
+	\end{equation}
+	Doing same calculus on \symbishop, we get
+	\begin{equation}
+	\label{eq:teoremaDeltaparte2}
+	\begin{split}
+	\symbishop &=\sum_{i=1}^n  \sum_{j  \in K } f_{ij}\left[d_{\pi_{i_1i_2}(i)\pi_{i_1i_2}(j)}-d_{\pi(i)\pi(j)}\right]\\
+	&=\sum_{i=1}^n \left\{f_{ii_1}\left[d_{\pi_{i_1i_2}(i)\pi(i_2)}-d_{\pi(i)\pi(i_1)}\right]
+	+
+	f_{ii_2}\left[d_{\pi_{i_1i_2}(i)\pi(i_1)}-d_{\pi(i)\pi(i_2)}\right]\right\} \\
+	&=\sum_{j=1}^n \left\{f_{ji_1}\left[d_{\pi_{i_1i_2}(j)\pi(i_2)}-d_{\pi(j)\pi(i_1)}\right]
+	+
+	f_{ji_2}\left[d_{\pi_{i_1i_2}(j)\pi(i_1)}-d_{\pi(j)\pi(i_2)}\right]\right\}. \\
+	\end{split}
+	\end{equation}
+	Where in the last step we changed the name of the variable from $i$ to $j$.
+	Then, the sum can be split again :
+	\begin{equation}
+	\begin{split}
+	\symbishop &= 
+	\sum_{j\in K}
+	\left\{f_{ji_1}\left[d_{\pi_{i_1i_2}(j)\pi(i_2)}-d_{\pi(j)\pi(i_1)}\right]
+	+
+	f_{ji_2}\left[d_{\pi_{i_1i_2}(j)\pi(i_1)}-d_{\pi(j)\pi(i_2)}\right]\right\} \\
+	&+ \sum_{j \notin K} \left\{f_{ji_1}\left[d_{\pi_{i_1i_2}(j)\pi(i_2)}-d_{\pi(j)\pi(i_1)}\right]
+	+
+	f_{ji_2}\left[d_{\pi_{i_1i_2}(j)\pi(i_1)}-d_{\pi(j)\pi(i_2)}\right]\right\}.
+	\end{split}
+	\end{equation}
+	
+	The first sum can be written explicitly:
+	\begin{equation}
+	\label{eq:teoremaDeltaparte1.5}
+	\begin{split}
+	&\sum_{j\in K}
+	\left\{f_{ji_1}\left[d_{\pi_{i_1i_2}(j)\pi(i_2)}-d_{\pi(j)\pi(i_1)}\right]
+	+
+	f_{ji_2}\left[d_{\pi_{i_1i_2}(j)\pi(i_1)}-d_{\pi(j)\pi(i_2)}\right]\right\} \\
+	&= 
+	f_{i_1i_1}\left[d_{\pi(i_2)\pi(i_2)}-b_{\pi(i_1)\pi(i_1)}\right]+
+	f_{i_1i_2}\left[d_{\pi(i_2)\pi(i_1)}-d_{\pi(i_1)\pi(i_2)}\right]\\
+	&+f_{i_2i_1}\left[d_{\pi(i_1)\pi(i_2)}-d_{\pi(i_2)\pi(i_1)}\right]+
+	f_{i_2i_2}\left[d_{\pi(i_1)\pi(i_1)}-d_{\pi(i_2)\pi(i_2)}\right]\\
+	&=\left(f_{i_1i_1}-f_{i_2i_2}\right)\left(d_{\pi(i_2)\pi(i_2)}-d_{\pi(i_2)\pi(i_1)}\right)\\
+	&+\left(f_{i_1i_2}-f_{i_2i_1}\right)\left(d_{\pi(i_2)\pi(i_1)}-d_{\pi(i_1)\pi(i_2)}\right).
+	\end{split}
+	\end{equation}
+	Finally, putting together \eqref{eq:teoremaDeltaparte1}, \eqref{eq:teoremaDeltaparte2} and \eqref{eq:teoremaDeltaparte1.5}, we get
+	\[
+	\begin{split}
+	z(\pi_{i_1 i_2})-z(\pi) &= 
+	\sum_{j \notin K} \left(f_{i_1j}-f_{i_2j}\right)\left(d_{\pi(i_2)\pi(j)}-d_{\pi(i_1)\pi(j)} \right) \\
+	&+\sum_{j \notin K}\left(f_{ji_1}-f_{ji_2}\right)\left(d_{\pi(j)\pi(i_2)}-d_{\pi(j)\pi(i_1)} \right) \\
+	&=\left(f_{i_1i_1}-f_{i_2i_2}\right)\left(d_{\pi(i_2)\pi(i_2)}-d_{\pi(i_2)\pi(i_1)}\right)\\
+	&+\left(f_{i_1i_2}-f_{i_2i_1}\right)\left(d_{\pi(i_2)\pi(i_1)}-d_{\pi(i_1)\pi(i_2)}\right).\qedhere
+	\end{split}
+	\]
+	
+\end{proof}

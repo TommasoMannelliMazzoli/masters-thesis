@@ -1,0 +1,99 @@
+\chapter{Proof of theorem 3.2}
+\label{AppendiceB}
+
+\begin{teo*}
+	Let $\pi \in \Sn$ be a permutation and $i_1,i_2,i_3 \in [n]$ three distinct indices.  Then one has
+	\begin{itemize}
+		\item $z\left(\pi^1_{i_1i_2i_3}\right)= z(\pi) +\Delta^1(\pi;i_1,i_2,i_3)$. 
+		\item $z\left(\pi^2_{i_1i_2i_3}\right)= z(\pi) +\Delta^2(\pi;i_1,i_2,i_3)$. 
+	\end{itemize}
+\end{teo*}
+\begin{proof}\mbox{}\\
+	\noindent It is sufficient to evaluate the differences $z\left(\pi^1_{i_1i_2i_3}\right)-z(\pi)$ and $z\left(\pi^2_{i_1i_2i_3}\right)-z(\pi)$.
+	
+	We will do  the first evaluation, the second one is, \textit{mutatis mutandis}, totally similar.
+	For sake of clarity we will denote $\pi^1_{i_1i_2i_3}$ as $\tilde \pi$.
+	Taking inspiration from theorem \ref{teo:2optDelta},
+	\begin{equation}
+	\label{eq:Delta1formula1}
+	\begin{split}
+	z(\tilde{\pi})-z(\pi)
+	&=\sum_{i=1}^n\sum_{j=1}^n 
+	f_{ij}d_{\tilde{\pi}(i)\tilde{\pi}(j)}
+	-
+	\sum_{i=1}^n\sum_{j=1}^n
+	f_{ij}d_{\pi(i)\pi(j)} \\
+	&=\sum_{i=1}^n\sum_{j=1}^n f_{ij}\left[d_{\tilde{\pi}(i)\tilde{\pi}(j)}-d_{\pi(i)\pi(j)}\right].\\
+	\end{split}
+	\end{equation}
+	Let $K = \{i_1,i_2,i_3\}$. The sum can be split into two parts: 
+	\[
+	\underbrace{\sum_{j\notin K}\sum_{i=1}^n f_{ij}\left[d_{\tilde{\pi}(i)\tilde{\pi}(j)}-d_{\pi(i)\pi(j)}\right]}_{\symbishop}
+	+
+	\underbrace{\sum_{j\in K}\sum_{i=1}^n f_{ij}\left[d_{\tilde{\pi}(i)\tilde{\pi}(j)}-d_{\pi(i)\pi(j)}\right]}_{\symknight}.
+	\]
+	As regards $\symbishop$, we can note that those $i$ such that $i\notin K$ produce a null term, hence the sum $\sum_{i\notin K}\sum_{j\notin K}$ is equal to $0$. Thus,
+	
+	\begin{equation}
+	\label{eq:Delta1formula3}
+	\begin{split}
+	&\sum_{j\notin K}\sum_{i\in K}  f_{ij}\left[d_{\tilde{\pi}(i)\tilde{\pi}(j)}-d_{\pi(i)\pi(j)}\right] \\
+	=& \sum_{j\notin K}\Big\{
+	f_{i_1j}\left[d_{\pi(i_2){\pi}(j)}-d_{\pi(i_1)\pi(j)}\right]+f_{i_2j}\left[d_{\pi(i_3){\pi}(j)}-d_{\pi(i_2)\pi(j)}\right]\\
+	&\phantom{\sum_{j\notin K} } +f_{i_3j}\left[d_{\pi(i_1){\pi}(j)}-d_{\pi(i_3)\pi(j)}\right]\Big\}.\\
+	\end{split}
+	\end{equation}
+	For $\symknight$, with the same idea we get
+	\begin{align*}
+	&\sum_{j\in K}\sum_{i=1}^n f_{ij}\left[d_{\tilde{\pi}(i)\tilde{\pi}(j)}-d_{\pi(i)\pi(j)}\right]\\
+	=& \sum_{i=1}^n\Big\{
+	f_{ii_1}\left[d_{\tilde{\pi}(i){\pi}(i_2)}-d_{\pi(i)\pi(i_1)}\right]
+	+
+	f_{ii_2}\left[d_{\tilde{\pi}(i){\pi}(i_3)}-d_{\pi(i)\pi(i_2)}\right]\\
+	&\phantom{\sum_{j\notin K} } 
+	+
+	f_{ii_3}\left[d_{\tilde{\pi}(i){\pi}(i_3)}-d_{\pi(i)\pi(i_3)}\right]\Big\}\\
+	\overset{i\to j}{=}& 
+	\sum_{j=1}^n\Big\{
+	f_{ji_1}\left[d_{\tilde{\pi}(j){\pi}(i_2)}-d_{\pi(j)\pi(i_1)}\right]
+	+
+	f_{ji_2}\left[d_{\tilde{\pi}(j){\pi}(i_3)}-d_{\pi(j)\pi(i_2)}\right]\displaybreak[0]\\
+	&\phantom{\sum_{j\notin K} } 
+	+
+	f_{ji_3}\left[d_{\tilde{\pi}(j){\pi}(i_3)}-d_{\pi(j)\pi(i_3)}\right]\Big\}\\
+	=& 
+	\sum_{j\notin K}^n\Big\{
+	f_{ji_1}\left[d_{\pi(j){\pi}(i_2)}-d_{\pi(j)\pi(i_1)}\right]
+	+
+	f_{ji_2}\left[d_{\pi(j){\pi}(i_3)}-d_{\pi(j)\pi(i_2)}\right]\\
+	&\phantom{\sum_{j\notin K} } 
+	+
+	f_{ji_3}\left[d_{\pi(j){\pi}(i_3)}-d_{\pi(j)\pi(i_3)}\right]\Big\}\\
+	&+
+	f_{i_1i_1}\left[d_{\pi(i_2){\pi}(i_2)}-d_{\pi(i_1)\pi(i_1)}\right]+ f_{i_1i_2}\left[d_{\pi(i_2){\pi}(i_3)}-d_{\pi(i_1)\pi(i_2)}\right] \\ &+f_{i_1i_3}\left[d_{\pi(i_2){\pi}(i_1)}-d_{\pi(i_1)\pi(i_3)}\right]+
+	f_{i_2i_1}\left[d_{\pi(i_3){\pi}(i_2)}-d_{\pi(i_2)\pi(i_1)}\right]\\ &+f_{i_2i_2}\left[d_{\pi(i_3){\pi}(i_3)}-d_{\pi(i_2)\pi(i_2)}\right] + f_{i_2i_3}\left[d_{\pi(i_2){\pi}(i_1)}-d_{\pi(i_2)\pi(i_3)}\right]\\
+	&+f_{i_3i_1}\left[d_{\pi(i_1){\pi}(i_2)}-d_{\pi(i_3)\pi(i_1)}\right] + f_{i_3i_2}\left[d_{\pi(i_1){\pi}(i_3)}-d_{\pi(i_3)\pi(i_2)}\right]\\ &+f_{i_3i_3}\left[d_{\pi(i_1){\pi}(i_1)}-d_{\pi(i_3)\pi(i_3)}\right].
+	\end{align*}
+	
+	Putting \eqref{eq:Delta1formula1} and \eqref{eq:Delta1formula3} together, we obtain
+	
+	\[
+	\begin{split}
+	z(\tilde{\pi})-z(\pi)=& 
+	\sum_{j\notin K}^n\Big\{
+	f_{ji_1}\left[d_{\pi(j){\pi}(i_2)}-d_{\pi(j)\pi(i_1)}\right]
+	+
+	f_{ji_2}\left[d_{\pi(j){\pi}(i_3)}-d_{\pi(j)\pi(i_2)}\right]\\
+	&\quad 
+	+
+	f_{ji_3}\left[d_{\pi(j){\pi}(i_3)}-d_{\pi(j)\pi(i_3)}\right]+f_{i_1j}\left[d_{\pi(i_2){\pi}(j)}-d_{\pi(i_1)\pi(j)}\right]\\
+	&\quad +
+	f_{i_2j}\left[d_{\pi(i_3){\pi}(j)}-d_{\pi(i_2)\pi(j)}\right]+f_{i_3j}\left[d_{\pi(i_1){\pi}(j)}-d_{\pi(i_3)\pi(j)}\right]\Big\}\\
+	&+
+	f_{i_1i_1}\left[d_{\pi(i_2){\pi}(i_2)}-d_{\pi(i_1)\pi(i_1)}\right]+ f_{i_1i_2}\left[d_{\pi(i_2){\pi}(i_3)}-d_{\pi(i_1)\pi(i_2)}\right] \\ &+f_{i_1i_3}\left[d_{\pi(i_2){\pi}(i_1)}-d_{\pi(i_1)\pi(i_3)}\right]+
+	f_{i_2i_1}\left[d_{\pi(i_3){\pi}(i_2)}-d_{\pi(i_2)\pi(i_1)}\right]\\ &+f_{i_2i_2}\left[d_{\pi(i_3){\pi}(i_3)}-d_{\pi(i_2)\pi(i_2)}\right] + f_{i_2i_3}\left[d_{\pi(i_3){\pi}(i_1)}-d_{\pi(i_2)\pi(i_3)}\right]\\
+	&+f_{i_3i_1}\left[d_{\pi(i_1){\pi}(i_2)}-d_{\pi(i_3)\pi(i_1)}\right] + f_{i_3i_2}\left[d_{\pi(i_1){\pi}(i_3)}-d_{\pi(i_3)\pi(i_2)}\right]\\ &+f_{i_3i_3}\left[d_{\pi(i_1){\pi}(i_1)}-d_{\pi(i_3)\pi(i_3)}\right],
+	\end{split}
+	\]
+	\noindent which is equal to $\Delta^1(\pi,i_1,i_2,i_3)$ on formula \eqref{eq:Delta1}.
+\end{proof}

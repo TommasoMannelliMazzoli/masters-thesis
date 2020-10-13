@@ -1,0 +1,29 @@
+\chapter{Conclusions and future works.}
+\label{chap:Conclusions}
+
+\section{Future Works}
+We can list some possible future developments:
+
+\begin{description}
+	\item[Evaluation of $2,3$-exchanges]
+	As regards local search algorithms, we can observe that the $3$-exchange \footnotesize $\{i_1,i_2,i_3\}\to\{i_2,i_3,i_1\}$ \normalsize can be obtained by performing two $2$-exchanges: \footnotesize$\{i_1,i_2,i_3\}\to \{i_2,i_1,i_3\}\to \{i_2,i_3,i_1\}$\normalsize. 
+	
+	The same thing occurs with the $3$-exchange \footnotesize$\{i_1,i_2,i_3\}\to\{i_3,i_1,i_2\}$\normalsize, in fact \footnotesize$\{i_1,i_2,i_3\}\to \{i_2,i_1,i_3\}\to \{i_3,i_1,i_2\}$\normalsize.
+	
+	One can observe that both contains the $2$-exchange \footnotesize $\{i_1,i_2,i_3\}\to\{i_2,i_1,i_3\}$\normalsize. This allows us to reduce the number of operations needed to evaluate $\Delta^1(\pi;i_1,i_2,i_3)$ and  $\Delta^2(\pi;i_1,i_2,i_3)$. 
+	
+	A $3$-optimum algorithm implemented with this technique will provide $2$-optimal and $3$-optimal solutions with a computational cost of $O(n)$ operations.
+	
+\item[Improvement of Tabu Search Algorithm]	As we saw in Chapter~\ref{chap:Computational_results}, Tabu Search algorithms did not perform well. There can be many reasons for that. One possible solution is to modify the algorithm, adding more parameters, which are typically used in modern TS. An other possibility is to use an adaptive algorithm to for the auto-calibration of parameters (like Particle Swarm Optimization, PSO). 
+
+\item[New algorithms] Of course there are lots of possible new algorithms to implement. One can cite Simulated Annealing, Genetic Algorithm, Memetic algorithm, GRASP, Bee Colony Optimization, and so on and so forth. Another approach could be to make an hybrid method mixing, for example, Tabu Search with Ant Colony Optimization.
+
+
+
+\end{description}
+
+\section{Concluding Remarks}
+
+We presented the QAP, an optimization problem that challenged hundreds of researches since 1957. 
+
+The goal of this thesis was to study, implement, compare heuristic and metaheuristic algorithms. Every aspect of the goal has been accomplished and has been an educative experience.
